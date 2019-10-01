@@ -9,8 +9,40 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    var items = [
+        Color.green,
+        Color.blue,
+        Color.purple,
+        Color.pink,
+        Color.yellow,
+        Color.orange
+    ]
+    
     var body: some View {
-        Text("Hello World")
+        GeometryReader { gr in
+            VStack(spacing: 20) {
+                Text("ScrollView")
+                    .font(.largeTitle)
+                Text("Scroll Horizontaly")
+                    .font(.title)
+                    .foregroundColor(.gray)
+                Text("Just set the ScrollView'a axis to horizontal and if the contents go horizontally beyond the frame, scrolling will be enabled.")
+                
+                ScrollView(Axis.Set.horizontal, showsIndicators: true) {
+                    HStack {
+                        ForEach(self.items, id: \.self) { item in
+                            RoundedRectangle(cornerRadius: 15)
+                            .fill(item)
+                                .frame(width: gr.size.width - 60, height: 200)
+                            
+                        }
+                    }
+                }.padding(.horizontal)
+                Spacer()
+            }
+            
+        }
     }
 }
 
